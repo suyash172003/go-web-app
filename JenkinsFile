@@ -7,10 +7,7 @@ pipeline {
                 script {
                     // Clone the repository
                     sh """
-                        mkdir -p go-web-app
-                        cd go-web-app
-                        rm -rf main
-                        git clone https://github.com/suyash172003/go-web-app.git .
+                        git clone https://github.com/suyash172003/go-web-app.git
                     """
                 }
             }
@@ -22,6 +19,7 @@ pipeline {
                     // Build the Go application
                     sh """
                         cd go-web-app
+                        rm -rf main 
                         go build -o main
                     """
                 }
