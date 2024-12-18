@@ -7,7 +7,7 @@ pipeline {
                 script {
                     // Clone the repository
                     sh """
-                        git clone https://github.com/suyash172003/go-web-app.git
+                        git clone https://github.com/suyash172003/go-web-app.git .
                     """
                 }
             }
