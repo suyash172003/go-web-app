@@ -18,4 +18,4 @@ spec:
       - name: go-web-app
         image: suyash172003/go-web-app
         ports:
-        - containerPort: 8080
+        - containerPort: 80

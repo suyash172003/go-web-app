@@ -1,0 +1,23 @@
+pipeline {
+    agent any;
+    stages{
+        stage("build"){
+            steps{
+                mkdir go-web-app
+                cd go-web-app
+                git clone https://github.com/suyash172003/go-web-app.git
+                go build -o main
+                ./main
+                 
+            }
+        }
+
+        stage("test"){
+            echo "running test file"
+        }
+        
+        stage("push"){
+            echo "push images"
+        }
+    }
+}
