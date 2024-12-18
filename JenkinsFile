@@ -7,7 +7,7 @@ pipeline {
                 script {
                     // Build the Go application
                     sh """
-                        cd go-web-app
+                        cd /var/jenkins_home/workspace/go-web-app
                         rm -rf main 
                         go build -o main
                     """
