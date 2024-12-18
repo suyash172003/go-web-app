@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-    docker {
-        image 'golang:1.21'
-        }
-    }
-
+    agent any
     stages {
 
         stage("Clone Repository") {
