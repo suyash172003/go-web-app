@@ -9,6 +9,7 @@ pipeline {
                     sh """
                         mkdir -p go-web-app
                         cd go-web-app
+                        rm -rf main
                         git clone https://github.com/suyash172003/go-web-app.git .
                     """
                 }
