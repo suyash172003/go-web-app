@@ -20,8 +20,7 @@ pipeline {
                 script {
                     // Run the built Go application
                     sh """
-                        cd go-web-app
-                        ./main &
+                        ./main
                     """
                 }
             }
