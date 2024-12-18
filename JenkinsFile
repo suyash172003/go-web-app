@@ -1,23 +1,59 @@
 pipeline {
-    agent any;
-    stages{
-        stage("build"){
-            steps{
-                mkdir go-web-app
-                cd go-web-app
-                git clone https://github.com/suyash172003/go-web-app.git
-                go build -o main
-                ./main
-                 
+    agent any
+    stages {
+        stage("Clone Repository") {
+            steps {
+                script {
+                    // Clone the repository
+                    sh """
+                        mkdir -p go-web-app
+                        cd go-web-app
+                        git clone https://github.com/suyash172003/go-web-app.git .
+                    """
+                }
             }
         }
 
-        stage("test"){
-            echo "running test file"
+        stage("Build") {
+            steps {
+                script {
+                    // Build the Go application
+                    sh """
+                        cd go-web-app
+                        go build -o main
+                    """
+                }
+            }
         }
-        
-        stage("push"){
-            echo "push images"
+
+        stage("Run Application") {
+            steps {
+                script {
+                    // Run the built Go application
+                    sh """
+                        cd go-web-app
+                        ./main &
+                    """
+                }
+            }
+        }
+
+        stage("Test") {
+            steps {
+                script {
+                    // Add your test commands here
+                    echo "Running tests"
+                }
+            }
+        }
+
+        stage("Push") {
+            steps {
+                script {
+                    // Add your image push commands here
+                    echo "Pushing Docker images"
+                }
+            }
         }
     }
 }
