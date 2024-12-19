@@ -20,6 +20,7 @@ pipeline {
                 script {
                     // Run the built Go application
                     sh """
+                        docker ps
                         ./main
                     """
                 }
