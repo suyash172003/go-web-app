@@ -1,7 +1,6 @@
 pipeline {
     agent any
     stages {
-
         stage("Build") {
             steps {
                 script {
@@ -10,19 +9,20 @@ pipeline {
                         cd /var/jenkins_home/workspace/go-web-app
                         rm -rf main 
                         go build -o main
+                        
                     """
                 }
             }
         }
 
-        stage("Run Application") {
+        stage("Build Image of Docker and push image") {
             steps {
                 script {
                     // Run the built Go application
                     sh """
-                        docker ps
-                        ./main
-                    """
+                        docker -t suyash172003/go-web-app build .
+                        docker push suyash172003/go-web-app
+                       """
                 }
             }
         }
@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     // Add your image push commands here
-                    docker ps
+                  
                 }
             }
         }
