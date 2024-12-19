@@ -35,14 +35,5 @@ pipeline {
                 }
             }
         }
-
-        stage("Push") {
-            steps {
-                script {
-                    // Add your image push commands here
-                  
-                }
-            }
-        }
     }
 }
