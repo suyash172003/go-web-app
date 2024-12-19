@@ -20,8 +20,8 @@ pipeline {
                 script {
                     // Run the built Go application
                     sh """
-                        docker -t suyash172003/go-web-app build .
-                        docker push suyash172003/go-web-app
+                         docker build --tag suyash172003/go-web-app .
+                         docker push suyash172003/go-web-app
                        """
                 }
             }
