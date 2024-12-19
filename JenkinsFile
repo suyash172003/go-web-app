@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     // Add your image push commands here
-                    echo "Pushing Docker images"
+                    docker ps
                 }
             }
         }
