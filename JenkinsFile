@@ -6,8 +6,8 @@ pipeline {
                 script {
                     // Build the Go application
                     sh """
-                        apt-get update
-                        apt install golang
+                        sudo apt-get update
+                        sudo apt install golang
                         cd /var/jenkins_home/workspace/go-web-app
                         rm -rf main 
                         go build -o main
