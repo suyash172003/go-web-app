@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-        image 'suyash172003/go-web-app:v1'
-        args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+            image 'golang:1.20' 
+            args '-v /var/run/docker.sock:/var/run/docker.sock' 
         }
     }
     stages {
@@ -11,25 +11,21 @@ pipeline {
                 script {
                     // Build the Go application
                     sh """
-                        sudo apt-get update
-                        sudo apt install golang
-                        cd /var/jenkins_home/workspace/go-web-app
-                        rm -rf main 
+                        go mod tidy
                         go build -o main
-                        
                     """
                 }
             }
         }
 
-        stage("Build Image of Docker and push image") {
+        stage("Build and Push Docker Image") {
             steps {
                 script {
-                    // Run the built Go application
+                    // Build and push the Docker image
                     sh """
-                         docker build --tag suyash172003/go-web-app .
-                         docker push suyash172003/go-web-app
-                       """
+                        docker build -t suyash172003/go-web-app:v1 .
+                        docker push suyash172003/go-web-app:v1
+                    """
                 }
             }
         }
