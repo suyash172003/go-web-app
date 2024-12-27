@@ -1,16 +1,13 @@
 pipeline {
-    agent {
-        docker {
-            image 'suyash172003/go-web-app:latest'
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
     stages {
         stage("Build") {
             steps {
                 script {
                     // Build the Go application
                     sh """
+                        sudo apt-get update
+                        sudo apt install golang
                         cd /var/jenkins_home/workspace/go-web-app
                         rm -rf main 
                         go build -o main
