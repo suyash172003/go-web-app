@@ -1,31 +1,28 @@
 pipeline {
-    agent {
-        docker {
-            image 'golang:1.20' 
-            args '-v /var/run/docker.sock:/var/run/docker.sock' 
-        }
-    }
+    agent any
     stages {
         stage("Build") {
             steps {
                 script {
                     // Build the Go application
                     sh """
-                        go mod tidy
+                        cd /var/jenkins_home/workspace/go-web-app
+                        rm -rf main 
                         go build -o main
+                        
                     """
                 }
             }
         }
 
-        stage("Build and Push Docker Image") {
+        stage("Build Image of Docker and push image") {
             steps {
                 script {
-                    // Build and push the Docker image
+                    // Run the built Go application
                     sh """
-                        docker build -t suyash172003/go-web-app:v1 .
-                        docker push suyash172003/go-web-app:v1
-                    """
+                         docker build --tag suyash172003/go-web-app .
+                         docker push suyash172003/go-web-app
+                       """
                 }
             }
         }
